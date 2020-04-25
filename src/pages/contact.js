@@ -1,14 +1,13 @@
 import React from 'react';
-import Layout from '../../components/layout';
+import Layout from '../components/layout';
 
 
 const ContactPage = () => {
     return (
         <div>
             <Layout>
-            <h2>Contact | Chris Langston</h2>
             <p>
-                You can reach me the following ways:            
+                You can reach me in any of the following ways:            
             </p>
             <ol>
                     <li>Email at chris@chrislangston.com</li>
