@@ -8,7 +8,7 @@ const IndexPage = () => {
             <h1>Hello</h1>
             <h3>Professionally I'm an Enterprise Software Architect focusing on the Azure Cloud.</h3>
             <h3>
-                Personally I'm married to my high school Sweat Heart Stephanie and I'm a father of two children adopted from Colombia.
+                Personally I'm a husband and dad trying to enjoy this journey called Life :-) 
             </h3>
 
             <p>To find more about me, visit the <Link to="/about">About Page</Link></p>
