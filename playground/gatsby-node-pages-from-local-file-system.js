@@ -1,24 +1,24 @@
 const path = require('path');
 
-// module.exports.onCreateNode = ({ node, actions }) => {
-//     const { createNode, createNodeField } = actions
-//     // Transform the new node here and create a new node or
-//     // create a new node field.
+module.exports.onCreateNode = ({ node, actions }) => {
+    const { createNode, createNodeField } = actions
+    // Transform the new node here and create a new node or
+    // create a new node field.
 
-//     if (node.internal.type === 'MarkdownRemark'){
-//         //console.log(JSON.stringify(node, undefined, 4))
-//         //fileAbsolutePath
-//         const slug = path.basename(node.fileAbsolutePath, '.md');
+    if (node.internal.type === 'MarkdownRemark'){
+        //console.log(JSON.stringify(node, undefined, 4))
+        //fileAbsolutePath
+        const slug = path.basename(node.fileAbsolutePath, '.md');
 
-//         //console.log(slug);
-//         createNodeField({
-//             node,
-//             name: 'slug',
-//             value: slug
-//         });
-//     }
+        //console.log(slug);
+        createNodeField({
+            node,
+            name: 'slug',
+            value: slug
+        });
+    }
 
-//   }
+  }
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
@@ -30,14 +30,16 @@ module.exports.createPages = async ({ graphql, actions, reporter }) => {
     
     const result = await graphql(
       `query {
-        allContentfulBlogPost {
-          edges {
-            node {  
-              slug
+          allMarkdownRemark {
+            edges {
+              node {
+                fields {
+                    slug
+                }
+              }
             }
           }
         }
-      }
       `
     )
 
@@ -47,14 +49,14 @@ module.exports.createPages = async ({ graphql, actions, reporter }) => {
       return
     }
 
-    result.data.allContentfulBlogPost.edges.forEach((edge) => {
+    result.data.allMarkdownRemark.edges.forEach(({node}) => {
       createPage({
-        path: `/blog/${edge.node.slug}`,
+        path: `/blog/${node.fields.slug}`,
         component: blogPostTemplate,
         // In your blog post template's graphql query, you can use pagePath
         // as a GraphQL variable to query for data from the markdown file.
         context: {
-          slug: edge.node.slug
+          slug: node.fields.slug
         },
       })
     })
