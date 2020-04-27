@@ -12,6 +12,7 @@ module.exports = {
     author: 'Chris Langston'
   },
   plugins: [
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     {
       resolve: `gatsby-source-contentful`,
