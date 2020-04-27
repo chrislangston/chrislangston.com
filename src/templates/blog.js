@@ -35,13 +35,22 @@ query ($slug:String!) {
 
 const Blog = (props) => {
 
-    console.log(props.data);
+  const options = {
+    renderNode: {
+      "embedded-asset-block": (node) => {
+        const alt = node.data.target.fields.title['en-US']
+        const url = node.data.target.fields.file['en-US'].url
+        return <img alt={alt} src={url} />
+      }
+    }
+  }
+  console.log(props.data.contentfulBlogPost.body.json);
     return (
         <Layout>
           <h1>{props.data.contentfulBlogPost.title}</h1>
           <p>{props.data.contentfulBlogPost.publishedDate}</p>
           {
-            documentToReactComponents(props.data.contentfulBlogPost.body.json)
+            documentToReactComponents(props.data.contentfulBlogPost.body.json, options)
           }
         </Layout>
     )
