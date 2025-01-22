@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <footer className={footerStyles.footer}>
       <p>
-        This is a lightening fast static site created by{" "}
+        This is a static site created by{" "}
         {data.site.siteMetadata.author}, {new Date().getFullYear()}
       </p>
     </footer>
